@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1F4FBF;
+  --color-secondary: #0F3E9D;
+  --color-accent: #2563EB;
+  --color-surface: #F8FAFC;
+  --color-ink: #111827;
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans text-ink bg-white antialiased;
+  }
+
+  ::selection {
+    @apply bg-primary text-white;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-secondary via-primary to-accent bg-clip-text text-transparent;
+  }
+
+  .glass {
+    @apply bg-white/70 backdrop-blur-md border border-white/40 shadow-lg;
+  }
+
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 py-16 md:py-24;
+  }
+
+  .team-marquee {
+    animation: team-marquee-rtl 40s linear infinite;
+  }
+
+  @keyframes team-marquee-rtl {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes service-heading-glow {
+    0%,
+    100% {
+      text-shadow:
+        0 0 4px rgba(147, 197, 253, 0.35),
+        0 0 12px rgba(37, 99, 235, 0.25);
+      filter: brightness(1);
+    }
+    50% {
+      text-shadow:
+        0 0 8px rgba(147, 197, 253, 0.75),
+        0 0 20px rgba(37, 99, 235, 0.55),
+        0 0 32px rgba(31, 79, 191, 0.35);
+      filter: brightness(1.08);
+    }
+  }
+
+  @keyframes service-heading-line {
+    0%,
+    100% {
+      transform: scaleX(0.55);
+    }
+    50% {
+      transform: scaleX(1);
+    }
+  }
+
+  .service-heading-shine {
+    animation: service-heading-glow 3.8s ease-in-out infinite;
+  }
+
+  .service-heading-line {
+    transform-origin: center;
+    animation: service-heading-line 5.5s ease-in-out infinite;
+  }
+
+  .custom-sign-stroke {
+    fill: none;
+    stroke-dasharray: 420;
+    stroke-dashoffset: 420;
+    animation: custom-sign-draw 5.2s ease-in-out infinite;
+  }
+
+  .custom-sign-d1 {
+    animation-delay: 0s;
+  }
+  .custom-sign-d2 {
+    animation-delay: 0.18s;
+  }
+  .custom-sign-d3 {
+    animation-delay: 0.4s;
+  }
+  .custom-sign-d4 {
+    animation-delay: 0.85s;
+  }
+  .custom-sign-d5 {
+    animation-delay: 1.2s;
+  }
+  .custom-sign-d6 {
+    animation-delay: 1.55s;
+  }
+
+  .custom-sign-fill {
+    opacity: 0;
+    animation: custom-sign-fill 5.2s ease-in-out infinite;
+  }
+
+  @keyframes custom-sign-draw {
+    0% {
+      stroke-dashoffset: 420;
+    }
+    38% {
+      stroke-dashoffset: 0;
+    }
+    78% {
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dashoffset: 420;
+    }
+  }
+
+  @keyframes custom-sign-fill {
+    0%,
+    22% {
+      opacity: 0;
+    }
+    40%,
+    78% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .team-marquee,
+    .service-heading-shine,
+    .service-heading-line,
+    .custom-sign-stroke,
+    .custom-sign-fill {
+      animation: none;
+    }
+
+    .custom-sign-stroke {
+      stroke-dashoffset: 0;
+    }
+
+    .custom-sign-fill {
+      opacity: 1;
+    }
+  }
+}
